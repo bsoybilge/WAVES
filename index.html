@@ -19,11 +19,11 @@
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <video id="v0" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/wave.mp4"    playsinline webkit-playsinline loop></video>
-        <video id="v1" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/alone.mp4"   playsinline webkit-playsinline loop></video>
-        <video id="v2" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/void.mp4"    playsinline webkit-playsinline loop></video>
-        <video id="v3" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/echo.mp4"    playsinline webkit-playsinline loop></video>
-        <video id="v4" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/surface.mp4" playsinline webkit-playsinline loop></video>
+        <video id="v0" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/wave.mp4"    crossorigin="anonymous" playsinline webkit-playsinline loop preload="none"></video>
+        <video id="v1" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/alone.mp4"   crossorigin="anonymous" playsinline webkit-playsinline loop preload="none"></video>
+        <video id="v2" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/void.mp4"    crossorigin="anonymous" playsinline webkit-playsinline loop preload="none"></video>
+        <video id="v3" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/echo.mp4"    crossorigin="anonymous" playsinline webkit-playsinline loop preload="none"></video>
+        <video id="v4" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/surface.mp4" crossorigin="anonymous" playsinline webkit-playsinline loop preload="none"></video>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -55,6 +55,7 @@
         var index = entity.getAttribute("mindar-image-target").split(":")[1].trim();
         var video = document.getElementById("v" + index);
         entity.addEventListener("targetFound", function() {
+          video.load();
           video.play();
         });
         entity.addEventListener("targetLost", function() {
