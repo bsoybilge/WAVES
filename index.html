@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      html, body { margin: 0; overflow: hidden; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: targets.mind; autoStart: true"
+      embedded
+      color-space="sRGB"
+      renderer="colorManagement: true"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video id="v0" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/wave.mp4"    playsinline webkit-playsinline loop></video>
+        <video id="v1" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/alone.mp4"   playsinline webkit-playsinline loop></video>
+        <video id="v2" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/void.mp4"    playsinline webkit-playsinline loop></video>
+        <video id="v3" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/echo.mp4"    playsinline webkit-playsinline loop></video>
+        <video id="v4" src="https://pub-e85f30642f2e47eb896bf10698cf1c4b.r2.dev/surface.mp4" playsinline webkit-playsinline loop></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#v0" position="0 0 0" width="1" height="1" material="shader: flat"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-video src="#v1" position="0 0 0" width="1" height="1" material="shader: flat"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-video src="#v2" position="0 0 0" width="1" height="1" material="shader: flat"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-video src="#v3" position="0 0 0" width="1" height="1" material="shader: flat"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-video src="#v4" position="0 0 0" width="1" height="1" material="shader: flat"></a-video>
+      </a-entity>
+
+    </a-scene>
+
+    <script>
+      document.querySelectorAll("a-entity[mindar-image-target]").forEach(function(entity) {
+        var index = entity.getAttribute("mindar-image-target").split(":")[1].trim();
+        var video = document.getElementById("v" + index);
+        entity.addEventListener("targetFound", function() {
+          video.play();
+        });
+        entity.addEventListener("targetLost", function() {
+          video.pause();
+        });
+      });
+    </script>
+  </body>
+</html>
